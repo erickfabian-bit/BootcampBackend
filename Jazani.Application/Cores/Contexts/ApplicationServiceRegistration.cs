@@ -1,12 +1,9 @@
-﻿using Jazani.Application.Admins.Services.Implementations;
-using Jazani.Application.Admins.Services;
+﻿using Jazani.Application.Admins.Services;
+using Jazani.Application.Admins.Services.Implementations;
+using Jazani.Application.Generals.Services;
+using Jazani.Application.Generals.Services.Implementations;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jazani.Application.Cores.Contexts
 {
@@ -16,7 +13,9 @@ namespace Jazani.Application.Cores.Contexts
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddTransient<IOfficeService, OfficeService>();
+            //La clase "ApplicationAutofacModule" ya lo implementa :
+            //services.AddTransient<IOfficeService, OfficeService>();
+            //services.AddTransient<IMineralTypeService, MineralTypeService>();
 
             return services;
         }

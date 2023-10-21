@@ -1,8 +1,8 @@
-using Jazani.Application.Admins.Dtos.Offices.Mappers;
-using Jazani.Application.Admins.Services;
-using Jazani.Application.Admins.Services.Implementations;
-using Jazani.Infraestructure.Cores.Contexts;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Jazani.Application.Cores.Contexts;
+using Jazani.Infraestructure.Cores.Contexts;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,14 @@ builder.Services.addInfraestructureServices(builder.Configuration);
 
 //Application
 builder.Services.AddApplicationServices();
+
+//Autofac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(option =>
+    {
+        option.RegisterModule(new InfraestructureAutofacModule());
+        option.RegisterModule(new ApplicationAutofacModule());
+    });
 
 var app = builder.Build();
 
